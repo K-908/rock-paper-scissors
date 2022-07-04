@@ -26,7 +26,7 @@ function game(){
         }
         let computerSelection = computerPlay();
         console.log(playRound(playerSelection, computerSelection));
-        console.log("Wins: "+wins+". Losses: "+loss);
+        console.log("Wins: "+wins+".  Losses: "+loss);
     }
 }
 
