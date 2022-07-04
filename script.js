@@ -10,7 +10,7 @@ function playRound(playerSelection, computerSelection) {
         return "You tied!";
     } else{
         wins++;
-        return "You win!";
+        return "You win!!";
     }
   }
 
