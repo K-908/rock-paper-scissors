@@ -1,0 +1,9 @@
+#buttons{
+    display:flex;
+    
+}
+
+.imagen:hover{
+    border:3px solid yellow;
+    cursor: pointer;
+}

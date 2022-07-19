@@ -1,25 +1,63 @@
-window.addEventListener("load", game);
+window.addEventListener("load", start);
 let wins = 0;
 let loss = 0;
 
-function playRound(playerSelection, computerSelection) {
+function start(){
+    var imagenes = document.getElementsByClassName("imagen");
+    document.getElementById("restart").addEventListener("click", restart, false);
+    for (var i=0;i<imagenes.length;i++){
+        let computerSelection = computerPlay();
+        imagenes[i].addEventListener("click", playRound, false)
+    }
+}
+
+function end(){
+    var imagenes = document.getElementsByClassName("imagen");
+    for (var i=0;i<imagenes.length;i++){
+        let computerSelection = computerPlay();
+        imagenes[i].removeEventListener("click", playRound, false)
+    }
+}
+
+
+function playRound() {
+    let playerSelection = this.id;
+    let computerSelection = computerPlay();
+    let score = document.getElementById("score");
+    document.getElementById("test").innerHTML = playerSelection + "   "+computerSelection;
     if((playerSelection == "rock" && computerSelection == "paper")||(playerSelection == "paper" && computerSelection == "scissors")|| (playerSelection == "scissors" && computerSelection == "rock")){
         loss++;
-        return "You lose!";
+        score.innerHTML = "You lose!!<br> Wins:"+wins+"<br>Losses: "+loss;
     } else if(playerSelection == computerSelection){
-        return "You tied!";
+        score.innerHTML = "You tied!!<br> Wins:"+wins+"<br>Losses: "+loss;
     } else{
         wins++;
-        return "You win!!";
+        score.innerHTML = "You win!!<br> Wins:"+wins+"<br>Losses: "+loss;
+    }
+    if(wins==5){
+        document.getElementById("final").innerHTML = "YOU WON!!!!";
+        end();
+    } else if(loss == 5){
+        document.getElementById("final").innerHTML = "YOU LOST!!!!";
+        end();
     }
   }
 
+  function restart(){
+    wins = 0;
+    loss = 0;
+    document.getElementById("score").innerHTML = "";
+    document.getElementById("test").innerHTML = "";
+    document.getElementById("final").innerHTML = "";
+    start();
+  }
+/*
 function game(){
     const opt = ["rock", "paper", "scissors"];
     let playerSelection = "";
     for(let i=0;i<5;i++){
         while(true){
-            playerSelection = prompt("type rock, paper or scissors");
+            //playerSelection = prompt("type rock, paper or scissors");
             if(playerSelection.toLowerCase() == "rock" || playerSelection.toLowerCase() == "paper" || playerSelection.toLowerCase() == "scissors"){
                 break;
             }
@@ -29,7 +67,7 @@ function game(){
         console.log("Wins: "+wins+".  Losses: "+loss);
     }
 }
-
+*/
 function computerPlay(){
     const opt = ["rock", "paper", "scissors"];
     var pick = Math.floor(Math.random()*3);
